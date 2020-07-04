@@ -1,0 +1,7 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = nano
+[user]
+	name = oleksandr.korneiko
+	email = oleksandr.korneiko@gmail.com
+	signinkey = B86F36A66E4F5867
