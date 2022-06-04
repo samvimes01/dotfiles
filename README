@@ -21,3 +21,21 @@ curl https://get.volta.sh | bash -s -- --skip-setup
 adb tcpip 5555 from a command prompt
 adb shell "ip addr show wlan0 | grep -e wlan0$ | cut -d\" \" -f 6 | cut -d/ -f 1" to obtain the phone's IP address
 Disconnect USB cable and run adb connect <ip_address>:5555
+
+# scrcpy for android screen sharing
+
+cd ~/Docs/db100x100
+ssh -i ./LightsailDefaultKey-eu-central-1.pem ubuntu@3.68.199.65
+
+ssh -i ./ok_gmail_ec2_db1000nX100.pem ubuntu@ec2-16-170-222-146.eu-north-1.compute.amazonaws.com
+
+scp -r -i ./LightsailDefaultKey-eu-central-1.pem ./db1000nX100-for-docker ubuntu@3.68.199.65:/home/ubuntu/
+
+scp -r -i ./ok_gmail_ec2_db1000nX100.pem ./db1000nX100-for-docker ubuntu@ec2-16-170-222-146.eu-north-1.compute.amazonaws.com:/home/ubuntu/
+
+ssh -i ./LightsailDefaultKey-eu-central-1.pem ubuntu@3.68.199.65 -t 'tmux -CC new -A -s tomac' 
+
+Java sdkman sdk list java
+https://stackoverflow.com/a/52524114
+sdk use java 8.0.333-librca
+sdk use java 11.0.15-librca

@@ -1,7 +1,29 @@
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/alex/.gitignore_global
 	editor = nano
 [user]
-	name = oleksandr.korneiko
+	name = Oleksandr Korneiko
+	# email = okorneiko_ext@mapal-os.com
+	# signinkey = 3B10E3B51698C17C
 	email = oleksandr.korneiko@gmail.com
-	signinkey = B86F36A66E4F5867
+	# signinkey = 24DE8CD521CC9261
+	# signinkey = 21CC9261
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg

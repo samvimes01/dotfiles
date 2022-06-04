@@ -3,4 +3,5 @@ alias applzcnf=". ~/.zshrc"
 alias knode="sudo killall -9 node"
 alias cpbr="git branch --show-current | pbcopy"
 
-alias code="open -a /Applications/Visual\ Studio\ Code.app"
+
+alias f="fvm flutter"

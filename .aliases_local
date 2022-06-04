@@ -1,42 +1,5 @@
  ## Projects
-alias cdS="cd ~/workspace/simplifield/sf-platform/"
-alias cdSF="cd ~/workspace/simplifield/sf-platform/repos/sf-frontend"
-alias cdSM="cd ~/workspace/simplifield/sf-platform/repos/sf-mobile"
-alias cdSB="cd ~/workspace/simplifield/sf-platform/repos/sf-backend"
-alias cdSL="cd ~/workspace/simplifield/sf-platform/repos/sf-login"
-alias mongoreslil2="mongorestore -d=simplifield_dev /Users/alex/workspace/simplifield/dbdump/simplifield_dev/"
-# mongorestore --archive=/var/folders/dv/_fpwz5d50bj66x4z8s_1235c0000gn/T/sf-dbstore/weekly/2021-10-07-Teva.gz --gzip
-lil() {
-  API_BASEURL='https://integration-lille2.simplifield.tech'\
-  AUTH_BASEURL='https://login.simplifield.tech'\
-  ENV=${ENV:=staging} "$@"
-};
-rel() {
-  API_BASEURL='https://preprod.simplifield.com'\
-  AUTH_BASEURL='https://login-preprod.simplifield.com'\
-  ENV=${ENV:=prerelease} "$@"
-};
-prep() {
-  API_BASEURL='https://staging.simplifield.tech'\
-  AUTH_BASEURL='https://login.simplifield.tech'\
-  ENV=${ENV:=staging} "$@"
-};
-relold() {
-  API_BASEURL='https://integration-release1.simplifield.tech'\
-  AUTH_BASEURL='https://login.simplifield.tech'\
-  ENV=${ENV:=preprod} "$@"
-};
-prod() {
-  API_BASEURL='https://app.simplifield.com'\
-  AUTH_BASEURL='https://login.simplifield.com'\
-  ENV=${ENV:=production} "$@"
-};
+alias cdGW="cd ~/workspace/mapal/GcWebApp-Angular"
+alias cdGWc="cd ~/workspace/mapal/GcWebApp-Angular && code ."
 
-alias moblil="lil yarn start"
-alias mobprep="prep yarn start"
-
-alias ionandr="npx ionic cordova run android -lc"
-alias ionios="npx ionic cordova run ios --target="A6FE7EC7-DC0E-48E2-A122-2EB1486C8538" -lc"
-
-##alias opensimdir="open `xcrun simctl get_app_container booted com.simplifield.app data`"
 

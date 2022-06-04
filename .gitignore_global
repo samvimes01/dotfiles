@@ -1,4 +1,5 @@
 .vscode
 .idea
 .yalc
+.fvm
 yalc.lock
