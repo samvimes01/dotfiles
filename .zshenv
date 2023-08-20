@@ -15,48 +15,35 @@ source $ZSH/oh-my-zsh.sh
 . ~/dotfiles/.aliases
 . ~/dotfiles/.aliases_local
 
-# - Exports
-# nvm
+# Exports
+
+## nvm
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+## volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+## yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+## Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH=$PATH:$JAVA_HOME:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/version/bin:$GRADLE_HOME/bin
 
 # Flutter
 export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 
-#volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-#Mac
-# export JAVA_HOME=`/usr/libexec/java_home -v 11`
-# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/Contents/Home"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export GRADLE_HOME=/usr/local/bin/gradle
-
-export PATH=$PATH:$JAVA_HOME:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/version/bin:$GRADLE_HOME/bin
-
-#Linux
-# JDK
-# if [[ -e /usr/lib/jvm/java-8-openjdk-amd64 ]]; then
-#   export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-#   export JRE_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
-#   export PATH="$PATH:$JAVA_HOME/bin"
-# fi
-# Android
-# export ANDROID_HOME=$HOME/Android/Sdk
-# export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-# export ANDROID_AVD_HOME=~/.android/avd
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-#export GRADLE_HOME=/opt/gradle/gradle-4.10.3
-#export PATH=$PATH:$GRADLE_HOME/bin
-
-# Go
+## Go
 export PATH=$PATH:/usr/local/go/bin
 
+export NODE_OPTIONS="--max-old-space-size=8192"
+
+## Ruby
+eval "$(rbenv init - zsh)"
+
+## vscodium
+export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin"

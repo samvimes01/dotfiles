@@ -1,7 +1,13 @@
-alias edzcnf="nano ~/.zshrc"
-alias applzcnf=". ~/.zshrc"
 alias knode="sudo killall -9 node"
 alias cpbr="git branch --show-current | pbcopy"
 
+# python
+alias python=python3
+alias pip=pip3
 
+# flutter
 alias f="fvm flutter"
+
+# certs jun 4 2025
+alias srvrunsec="npm run start  -- --ssl --ssl-key ~/.serts/localhost-key.pem --ssl-cert ~/.serts/localhost.pem" 
+alias srvdistsec="npx http-server ~/workspace/mapal/GcWebApp-Angular/dist/apps/compliance-webapp/ --port 4200 --ssl --key ~/.serts/localhost-key.pem --cert ~/.serts/localhost.pem"

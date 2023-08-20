@@ -1,5 +1,5 @@
  ## Projects
 alias cdGW="cd ~/workspace/mapal/GcWebApp-Angular"
-alias cdGWc="cd ~/workspace/mapal/GcWebApp-Angular && code ."
+alias cdGWc="cd ~/workspace/mapal/GcWebApp-Angular && codium ."
 
 
