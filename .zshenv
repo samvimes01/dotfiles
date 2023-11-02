@@ -42,8 +42,9 @@ export PATH=$PATH:/usr/local/go/bin
 
 export NODE_OPTIONS="--max-old-space-size=8192"
 
-## Ruby
+## Ruby Python
 eval "$(rbenv init - zsh)"
+eval "$(pyenv init -)"
 
 ## vscodium
 export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin"

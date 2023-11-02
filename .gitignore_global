@@ -1,5 +1,9 @@
 .vscode
 .idea
+.fleet
 .yalc
 .fvm
 yalc.lock
+node_modules*
+.npmrc
+.venv

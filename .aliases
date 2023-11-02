@@ -6,7 +6,7 @@ alias python=python3
 alias pip=pip3
 
 # flutter
-alias f="fvm flutter"
+# alias f="fvm flutter"
 
 # certs jun 4 2025
 alias srvrunsec="npm run start  -- --ssl --ssl-key ~/.serts/localhost-key.pem --ssl-cert ~/.serts/localhost.pem" 
