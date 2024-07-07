@@ -7,3 +7,6 @@ yalc.lock
 node_modules*
 .npmrc
 .venv
+.DS_Store
+.nx/
+.angular/

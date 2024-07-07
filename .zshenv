@@ -11,6 +11,8 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(git yarn npm docker)
 source $ZSH/oh-my-zsh.sh
 
+EDITOR="nvim"
+
 # Aliases
 . ~/dotfiles/.aliases
 . ~/dotfiles/.aliases_local
@@ -38,13 +40,37 @@ export PATH="$PATH:$HOME/development/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 
 ## Go
-export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export NODE_OPTIONS="--max-old-space-size=8192"
 
-## Ruby Python
+## Ruby
 eval "$(rbenv init - zsh)"
+## Python
+export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 ## vscodium
 export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin"
+
+## gcloud cli
+export CLOUDSDK_PYTHON="$(brew --prefix)/Cellar/python@3.11/3.11.7_1/bin/python3"
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+# fast cd and search
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
+
+# yazi cd on quit
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
