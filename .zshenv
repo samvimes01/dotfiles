@@ -11,6 +11,33 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(git yarn npm docker)
 source $ZSH/oh-my-zsh.sh
 
+# nvim
+# alias nvim-lazy="NVIM_APPNAME=nvim-lazyvim nvim"
+# alias nvim-kick="NVIM_APPNAME=nvim-kickstart nvim"
+alias nvim-chad="NVIM_APPNAME=nvim-nvchad nvim"
+# alias nvim-astro="NVIM_APPNAME=nvim-astrovim nvim"
+
+
+nv() {
+  # select config in lazyvim kickstart nvchad astrovim lunarvim
+  select config in nvchad lazyvim
+  do NVIM_APPNAME=nvim-$config nvim $@; break; done
+}
+nvims() {
+  # items=("default" "kickstart" "lazyvim" "nvchad" "astrovim" "lunarvim")
+  items=("nvchad" "lazyvim" "default" ) 
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=nvim-$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+# export NVIM_APPNAME=nvim-nvchad
 EDITOR="nvim"
 
 # Aliases
