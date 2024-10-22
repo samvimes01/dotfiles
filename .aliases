@@ -11,3 +11,52 @@ alias pip=pip3
 # certs jun 4 2025
 alias srvrunsec="npm run start  -- --ssl --ssl-key ~/.serts/localhost-key.pem --ssl-cert ~/.serts/localhost.pem" 
 alias srvdistsec="npx http-server ~/workspace/mapal/GcWebApp-Angular/dist/apps/compliance-webapp/ --port 4200 --ssl --key ~/.serts/localhost-key.pem --cert ~/.serts/localhost.pem"
+
+# nvim
+alias nvim-lazy="NVIM_APPNAME=nvim-lazyvim nvim"
+# alias nvim-kick="NVIM_APPNAME=nvim-kickstart nvim"
+alias nvim-chad="NVIM_APPNAME=nvim-nvchad nvim"
+# alias nvim-astro="NVIM_APPNAME=nvim-astrovim nvim"
+
+
+nv() {
+  # select config in lazyvim kickstart nvchad astrovim lunarvim
+  select config in lazyvim nvchad
+  do NVIM_APPNAME=nvim-$config nvim $@; break; done
+}
+nvims() {
+  # items=("default" "kickstart" "lazyvim" "nvchad" "astrovim" "lunarvim")
+  items=("lazyvim" "nvchad" "default" ) 
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=nvim-$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+# export NVIM_APPNAME=nvim-nvchad
+
+
+# yazi cd on quit
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# ffmpeg
+function ffmp() {
+  ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a copy "$@".mp4 
+}
+
+function ffmpx2() {
+  ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" -c:a aac -strict experimental  "$@".mp4
+}
+
