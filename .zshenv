@@ -47,6 +47,11 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export NODE_OPTIONS="--max-old-space-size=8192"
 
+# elixir
+elixir_installs_dir=$HOME/.elixir-install/installs
+export PATH=$elixir_installs_dir/otp/28.1/bin:$PATH
+export PATH=$elixir_installs_dir/elixir/1.19.4-otp-28/bin:$PATH
+
 ## Ruby
 eval "$(rbenv init - zsh)"
 ## Python
@@ -65,7 +70,10 @@ source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 # own scripts
 export PATH="$PATH:$HOME/workspace/scripts"
+# Podman
+#export PATH=/opt/podman/bin:$PATH
 
 # fast cd and search
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+

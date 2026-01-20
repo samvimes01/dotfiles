@@ -1,0 +1,17 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1	localhost
+127.0.0.1	smx.test app.smx.test qa1.smx.test qa2.smx.test qa3.smx.test div6.smx.test div5.smx.test glitchtip.smx.test
+#127.0.0.1	app.smx.dev qa1.smx.dev qa2.smx.dev qa3.smx.dev div6.smx.dev
+127.0.0.1	waste.dev
+::1	waste.dev
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1	kubernetes.docker.internal
+# End of section

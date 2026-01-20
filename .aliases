@@ -1,6 +1,10 @@
 alias knode="sudo killall -9 node"
 alias cpbr="git branch --show-current | pbcopy"
 
+alias pst="pnpm start"
+
+alias mc="mc --nosubshell"
+
 # python
 alias python=python3
 alias pip=pip3
@@ -60,3 +64,4 @@ function ffmpx2() {
   ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" -c:a aac -strict experimental  "$@".mp4
 }
 
+alias gloga='git --no-pager log --oneline --graph --decorate --all -n 10'
