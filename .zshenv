@@ -8,7 +8,7 @@ ZSH_DISABLE_COMPFIX=true
 ZSH_THEME="agnoster"
 SOLARIZED_THEME="light"
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git yarn npm docker)
+plugins=(git npm zsh-shift-select)
 source $ZSH/oh-my-zsh.sh
 
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -25,6 +25,8 @@ EDITOR="nvim"
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.local/bin:$PATH"
 
 ## volta
 export VOLTA_HOME="$HOME/.volta"
@@ -56,17 +58,20 @@ export PATH=$elixir_installs_dir/elixir/1.19.4-otp-28/bin:$PATH
 eval "$(rbenv init - zsh)"
 ## Python
 export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 ## vscodium
 export PATH="$PATH:/Applications/VSCodium.app/Contents/Resources/app/bin"
 
 ## gcloud cli
-export CLOUDSDK_PYTHON="$(brew --prefix)/Cellar/python@3.11/3.11.7_1/bin/python3"
-source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+#export CLOUDSDK_PYTHON="$(brew --prefix)/Cellar/python@3.11/3.11.7_1/bin/python3"
+#source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+#source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 # own scripts
 export PATH="$PATH:$HOME/workspace/scripts"
@@ -76,4 +81,12 @@ export PATH="$PATH:$HOME/workspace/scripts"
 # fast cd and search
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+
+
+# Added by Windsurf
+export PATH="/Users/alex/.codeium/windsurf/bin:$PATH"
+
+
+# Added by Antigravity
+export PATH="/Users/alex/.antigravity/antigravity/bin:$PATH"
 
