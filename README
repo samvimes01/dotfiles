@@ -1,39 +1,55 @@
-## install nerd font
+## Install
+
+```sh
+git clone <repo> ~/dotfiles
+cd ~/dotfiles
+git submodule update --init
+./install.sh
+```
+
+## Structure
+
+- `.exports` — shared env vars (PATH, EDITOR, etc.) sourced by both zsh and bash
+- `.zshenv` — minimal zsh env setup, sources `.exports`
+- `.zshrc` — interactive zsh config (aliases, fzf, zoxide, starship, history, completions)
+- `.zprofile` — login-only zsh setup (minimal)
+- `.bash_profile` — login bash, sources `.exports` + `.bashrc`
+- `.bashrc` — interactive bash config
+- `.aliases` — shared POSIX-compatible aliases
+- `.aliases_local` — gitignored local overrides
+- `.gitconfig_global` — symlinked as `~/.gitconfig`
+- `.ssh.config` — symlinked as `~/.ssh/config`
+- `.gnupg/` — symlinked contents to `~/.gnupg/`
+- `.config/` — submodule, symlinked to `~/.config`
+
+## Tools
+
+### Install nerd font
 
 ```sh
 brew tap homebrew/cask-fonts
 brew install --cask font-nerd-fonts
 ```
 
-## install powerline fonts (legacy)
-
-```sh
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd fonts
-./install.sh
-```
-
-
-## install starship - terminal UI
+### Install starship
 
 ```sh
 brew install starship
 ```
 
-## install mise - version manager
+### Install mise
 
 ```sh
 brew install mise
 ```
 
-## android adb via wifi
+## Android ADB via WiFi
 
 ```sh
-adb tcpip 5555 from a command prompt
-adb shell "ip addr show wlan0 | grep -e wlan0$ | cut -d\" \" -f 6 | cut -d/ -f 1" 
-# to obtain the phone's IP address Disconnect USB cable and run adb connect <ip_address>:5555
+adb tcpip 5555
+adb shell "ip addr show wlan0 | grep -e wlan0$ | cut -d\" \" -f 6 | cut -d/ -f 1"
+# Disconnect USB, then:
+adb connect <ip_address>:5555
 ```
 
 ## git submodule

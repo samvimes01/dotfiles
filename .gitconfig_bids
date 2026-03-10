@@ -1,6 +1,6 @@
 [user]
-        name = Oleksandr Korneiko
-        email = oleksandr.korneiko@bidscube.com
-        signingKey = 0DBA7E578458B8AE
+	name = Oleksandr Korneiko
+	email = oleksandr.korneiko@bidscube.com
+	signingKey = 0DBA7E578458B8AE
 [core]
-        sshCommand = ssh -i ~/.ssh/id_bids
+	sshCommand = ssh -i ~/.ssh/id_bids

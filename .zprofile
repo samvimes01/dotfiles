@@ -1,6 +1,2 @@
-
-
-# Added by Toolbox App
-export PATH="$PATH:/usr/local/bin"
-
-
+# Sourced once per login session — keep minimal
+# (PATH and env vars are set in .exports via .zshenv)

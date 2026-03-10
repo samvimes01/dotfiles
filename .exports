@@ -1,0 +1,44 @@
+# Shared environment variables — sourced by both zsh and bash
+# Keep POSIX-compatible (no bash/zsh-specific syntax)
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Editor
+export EDITOR="nvim"
+
+# Node
+export NODE_OPTIONS="--max-old-space-size=8192"
+
+# Own scripts
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/workspace/scripts"
+
+# Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/version/bin"
+
+# Flutter
+export PATH="$PATH:$HOME/development/flutter/bin"
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# Go
+export GOPATH="$HOME/go"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+
+# Elixir
+elixir_installs_dir="$HOME/.elixir-install/installs"
+export PATH="$elixir_installs_dir/otp/28.1/bin:$PATH"
+export PATH="$elixir_installs_dir/elixir/1.19.4-otp-28/bin:$PATH"
+
+# gcloud
+export CLOUDSDK_PYTHON="$(type python3)"
+
+# MySQL
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+# Toolbox App
+export PATH="$PATH:/usr/local/bin"
+
+# Windsurf/Codeium
+export PATH="/Users/alex/.codeium/windsurf/bin:$PATH"

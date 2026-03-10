@@ -4,6 +4,8 @@
 .windsurf
 .claude
 .agents
+.kilocode
+.kilocodeignore
 .yalc
 .fvm
 .zed
@@ -20,4 +22,5 @@ __pycache__
 _docker/APPS_DATA
 CLAUDE.md
 CLAUDE.local.md
+.mise.local.toml
 #.beads

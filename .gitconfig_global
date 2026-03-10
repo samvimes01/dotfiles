@@ -1,13 +1,13 @@
 [core]
 	excludesfile = /Users/alex/.gitignore_global
-  pager = delta
+	pager = delta
 [user]
 	name = Oleksandr Korneiko
 	email = oleksandr.korneiko@gmail.com
 [includeIf "gitdir:~/workspace/archive/simplex/"]
-    path = ~/.gitconfig_flex
+	path = ~/.gitconfig_flex
 [includeIf "gitdir:~/workspace/bids/"]
-    path = ~/.gitconfig_bids
+	path = ~/.gitconfig_bids
 [pull]
 	rebase = true
 [init]
@@ -23,37 +23,37 @@
 	program = /usr/local/bin/gpg
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+	diffFilter = delta --color-only --features=interactive
 
 [delta]
-    features = decorations
-    side-by-side = true
-    # line-numbers = true
+	features = decorations
+	side-by-side = true
+	# line-numbers = true
 
 [delta "interactive"]
-    keep-plus-minus-markers = false
+	keep-plus-minus-markers = false
 
 [delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    # hunk-header-style = file line-number syntax
-    hunk-header-style = file
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	# hunk-header-style = file line-number syntax
+	hunk-header-style = file
 [alias]
 	wtl = "!f() { git worktree list; }; f"
-  wta = "!f() { \
-    base=$(basename $(git rev-parse --show-toplevel)); \
-    target=\"/Users/alex/workspace/_gitwork/$base/$1\"; \
-    mkdir -p \"$target\" && \
-    git worktree add -b \"$1\" \"$target\" && \
-    [ -f \".env\" ] && cp .env \"$target/.env\"; \
-    cd \"$target\" && npm ci; \
-  }; f \"$@\""
-  wtr = "!f() { \
-    base=$(basename $(git rev-parse --show-toplevel)); \
-    target=\"/Users/alex/workspace/_gitwork/$base/$1\"; \
-    git worktree remove \"$target\"; \
-  }; f \"$@\""
+	wta = "!f() { \
+		base=$(basename $(git rev-parse --show-toplevel)); \
+		target=\"/Users/alex/workspace/_gitwork/$base/$1\"; \
+		mkdir -p \"$target\" && \
+		git worktree add -b \"$1\" \"$target\" && \
+		[ -f \".env\" ] && cp .env \"$target/.env\"; \
+		cd \"$target\" && npm ci; \
+	}; f \"$@\""
+	wtr = "!f() { \
+		base=$(basename $(git rev-parse --show-toplevel)); \
+		target=\"/Users/alex/workspace/_gitwork/$base/$1\"; \
+		git worktree remove \"$target\"; \
+	}; f \"$@\""

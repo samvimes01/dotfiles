@@ -9,6 +9,14 @@ alias mc="mc --nosubshell"
 alias python=python3
 alias pip=pip3
 
+# gcloud alias
+alias gcloud='docker run --rm -it -v ~/.config/gcloud-docker:/root/.config/gcloud google/cloud-sdk:latest gcloud'
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
 # The most important aliases ever (the only thing I borrowed from OMZ)
 alias l='ls -lah'
@@ -21,7 +29,6 @@ alias gcp='git cherry-pick'
 alias gca='git commit --amend'
 alias gcan='git commit --amend --no-edit'
 alias npmst='npm run start'
-
 
 # nvim
 alias nvim="NVIM_APPNAME=nvim-lazyvim nvim"
@@ -39,11 +46,11 @@ function yy() {
 
 # ffmpeg
 function ffmp() {
-  ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a copy "$@".mp4 
+	ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a copy "$@".mp4
 }
 
 function ffmpx2() {
-  ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" -c:a aac -strict experimental  "$@".mp4
+	ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" -c:a aac -strict experimental  "$@".mp4
 }
 
 alias gloga='git --no-pager log --oneline --graph --decorate --all -n 10'

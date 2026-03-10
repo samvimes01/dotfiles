@@ -1,3 +1,4 @@
 .aliases_local
 .zcompdump*
 .zsh_history
+.DS_Store
