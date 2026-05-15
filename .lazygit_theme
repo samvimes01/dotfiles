@@ -4,8 +4,9 @@ _terminal_bg_is_light() {
 
   local response
   print -n $'\e]11;?\e\\'
-  # Read until ST; 0.1s is plenty for a local terminal
-  IFS= read -rs -t 0.1 -d '\' response 2>/dev/null
+  # 1s timeout — cold terminals can be slow to respond, and a late
+  # response leaks onto the prompt as `^[]11;rgb:...^[\`
+  IFS= read -rs -t 1 -d '\' response 2>/dev/null
 
   # Response: \e]11;rgb:RRRR/GGGG/BBBB
   if [[ "$response" =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]]; then
@@ -20,6 +21,7 @@ _terminal_bg_is_light() {
   return 1
 }
 
-if _terminal_bg_is_light; then
-  export DELTA_FEATURES="+zed-light"
+if [[ -z "$_TERM_BG_LIGHT_CACHED" ]]; then
+  _terminal_bg_is_light && export _TERM_BG_LIGHT_CACHED=1 || export _TERM_BG_LIGHT_CACHED=0
 fi
+[[ "$_TERM_BG_LIGHT_CACHED" == 1 ]] && export DELTA_FEATURES="+zed-light"
