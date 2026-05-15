@@ -30,8 +30,11 @@ export GPG_TTY=$(tty)
 . ~/dotfiles/.aliases
 [ -f ~/dotfiles/.aliases_local ] && . ~/dotfiles/.aliases_local
 
+. ~/dotfiles/.lazygit_theme
+
 # Tool integrations (interactive only)
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
+eval "$(/usr/local/bin/brew shellenv)"

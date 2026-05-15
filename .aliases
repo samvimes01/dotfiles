@@ -28,6 +28,7 @@ alias gl='git pull'
 alias gcp='git cherry-pick'
 alias gca='git commit --amend'
 alias gcan='git commit --amend --no-edit'
+alias gloga='git --no-pager log --oneline --graph --decorate --all -n 10'
 alias npmst='npm run start'
 
 # nvim
@@ -53,4 +54,70 @@ function ffmpx2() {
 	ffmpeg -i "$@" -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -filter:v "setpts=0.5*PTS" -filter:a "atempo=2.0" -c:a aac -strict experimental  "$@".mp4
 }
 
-alias gloga='git --no-pager log --oneline --graph --decorate --all -n 10'
+fsb() {
+    local pattern="$*"
+    local branches branch
+
+    branches=$(git branch --all | awk -v pat="$pattern" 'tolower($0) ~ pat')
+    [ -z "$branches" ] && echo "[fsb] No branches found" && return 1
+
+    branch=$(echo "$branches" | fzf-tmux -p 80%,60% --reverse -1 -0 +m)
+    [ -z "$branch" ] && echo "[fsb] No branch selected" && return 1
+
+    git checkout "$(echo "$branch" | sed 's/.* //' | sed 's#remotes/[^/]*/##')"
+}
+
+fshow() {
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf-tmux -p 80%,60% --ansi --no-sort --reverse --tiebreak=index \
+    --header "enter to view, ctrl-o to checkout, ctrl-y to copy sha" \
+    --bind "ctrl-s:toggle-sort" \
+    --bind "ctrl-f:preview-page-down" \
+    --bind "ctrl-b:preview-page-up" \
+    --bind "q:abort" \
+    --bind 'ctrl-y:execute-silent:echo {} | rg -oN "[a-f0-9]{7,}" | head -1 | xargs git rev-parse | pbcopy' \
+    --preview 'commit=$(echo {} | rg -oN "[a-f0-9]{7,}" | head -1);
+              [ -n "$commit" ] && git show "$commit" | delta --width=${FZF_PREVIEW_COLUMNS:-80}' \
+    --preview-window=right:60% \
+    --bind 'ctrl-o:become:echo {} | rg -oN "[a-f0-9]{7,}" | head -1 | xargs git checkout' \
+    --bind 'ctrl-m:execute:
+              commit=$(echo {} | rg -oN "[a-f0-9]{7,}" | head -1);
+              [ -n "$commit" ] && DELTA_PAGER="less -R --mouse" git show "$commit"'
+}
+
+zed() {
+  if [[ $# -eq 1 && "$1" == *.code-workspace ]]; then
+    local ws_file="$1"
+    [[ -f "$ws_file" ]] || { echo "Workspace file not found: $ws_file" >&2; return 1; }
+
+    local ws_dir
+    ws_dir="$(cd "$(dirname "$ws_file")" && pwd)"
+
+    local folders
+    folders=$(sed 's|//.*||' "$ws_file" | jq -r '.folders[].path') || {
+      echo "Failed to parse workspace file" >&2; return 1
+    }
+
+    local dirs=()
+    while IFS= read -r p; do
+      [[ -z "$p" ]] && continue
+      if [[ "$p" == /* ]]; then
+        dirs+=("$p")
+      else
+        dirs+=("$ws_dir/$p")
+      fi
+    done <<< "$folders"
+
+    if (( ${#dirs[@]} == 0 )); then
+      echo "No folders found in workspace file" >&2
+      return 1
+    fi
+
+    echo "Opening ${#dirs[@]} folders in Zed:"
+    printf "  %s\n" "${dirs[@]}"
+    command zed "${dirs[@]}"
+  else
+    command zed "$@"
+  fi
+}

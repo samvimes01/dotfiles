@@ -1,0 +1,25 @@
+_terminal_bg_is_light() {
+  # Need a real tty for the round-trip; skip for non-interactive shells
+  [[ -t 0 && -t 1 ]] || return 1
+
+  local response
+  print -n $'\e]11;?\e\\'
+  # Read until ST; 0.1s is plenty for a local terminal
+  IFS= read -rs -t 0.1 -d '\' response 2>/dev/null
+
+  # Response: \e]11;rgb:RRRR/GGGG/BBBB
+  if [[ "$response" =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]]; then
+    # Take the high byte of each channel (handles both rgb:RR/GG/BB and rgb:RRRR/GGGG/BBBB)
+    local r=$((16#${match[1]:0:2}))
+    local g=$((16#${match[2]:0:2}))
+    local b=$((16#${match[3]:0:2}))
+    # Rec. 601 luma; >128 = light
+    (( (r*299 + g*587 + b*114) / 1000 > 128 ))
+    return $?
+  fi
+  return 1
+}
+
+if _terminal_bg_is_light; then
+  export DELTA_FEATURES="+zed-light"
+fi

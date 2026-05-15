@@ -28,7 +28,10 @@
 [delta]
 	features = decorations
 	side-by-side = true
-	# line-numbers = true
+
+[delta "zed-light"]
+	light = true
+	syntax-theme = Catppuccin Latte
 
 [delta "interactive"]
 	keep-plus-minus-markers = false

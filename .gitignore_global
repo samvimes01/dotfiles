@@ -4,11 +4,15 @@
 .windsurf
 .claude
 .agents
+.kilo
 .kilocode
 .kilocodeignore
 .yalc
+.yarn
 .fvm
 .zed
+.playwright*
+mise.local.toml
 skills-lock.json
 yalc.lock
 /node_modules*
@@ -23,4 +27,8 @@ _docker/APPS_DATA
 CLAUDE.md
 CLAUDE.local.md
 .mise.local.toml
-#.beads
+.beads
+.mcp.json
+docs/plans/
+docs/superpowers/
+dumps/
