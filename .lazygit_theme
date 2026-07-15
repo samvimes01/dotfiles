@@ -2,11 +2,18 @@ _terminal_bg_is_light() {
   # Need a real tty for the round-trip; skip for non-interactive shells
   [[ -t 0 && -t 1 ]] || return 1
 
-  local response
+  local response= char
   print -n $'\e]11;?\e\\'
-  # 1s timeout — cold terminals can be slow to respond, and a late
-  # response leaks onto the prompt as `^[]11;rgb:...^[\`
-  IFS= read -rs -t 1 -d '\' response 2>/dev/null
+  # Read the reply one byte at a time, stopping at either OSC terminator:
+  # ST (ESC \) — used by Ghostty/tmux — or BEL — used by macOS Terminal.app.
+  # A hard -d delimiter here would block forever on the terminator it doesn't
+  # expect; the per-byte -t 1 timeout guarantees we never hang if a terminal
+  # replies oddly or not at all (cold terminals may be slow on the first byte).
+  while IFS= read -rs -t 1 -k 1 char 2>/dev/null; do
+    [[ "$char" == $'\a' ]] && break            # BEL terminator
+    response+="$char"
+    [[ "$response" == *$'\e\\' ]] && break      # ST terminator
+  done
 
   # Response: \e]11;rgb:RRRR/GGGG/BBBB
   if [[ "$response" =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]]; then
